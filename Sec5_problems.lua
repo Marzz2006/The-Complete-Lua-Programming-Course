@@ -90,6 +90,7 @@ function calculateWinnings(input)
     end
 end
 
+--Problem 2
 --You have an empty bag where you can store and remove words.
 --Words can be repeated.
 --Removing a word means you only remove it once.
@@ -97,6 +98,93 @@ end
 --At any moment you can be asked for the lexicographically greatest word of the bag and how many times it's in the bag.
 --you can also be asked about the smallest word.
 
-function problem2()
+local words = {}
 
+function problem2()
+    while true do
+        local line = io.read()
+        local query, word = line:match("(%S+)%s*(%S*)")
+
+        if query == "store" then
+            insertOrUpdate(word)
+        elseif query == "maximum" then
+            local maxWord
+            for word,_ in pairs(words) do
+                if not maxWord or word > maxWord then
+                    maxWord = word
+                end
+            end
+            if not maxWord then
+                print("Indefinite Maximum")
+            else
+                print("Maximum Word: " .. maxWord .. ": " .. words[maxWord] .. " time(s).")
+            end
+        elseif query == "minimum" then
+            local minWord
+            for word,_ in pairs(words) do
+                if not minWord or word < minWord then
+                    minWord = word
+                end
+            end
+            if not minWord then
+                print("Indefinite Minimum")
+            else
+                print("Minimum Word: " .. minWord .. ": " .. words[minWord] .. " time(s).")
+            end
+        elseif query == "delete" then
+            if words[word] then
+                if words[word] > 1 then
+                    words[word] = words[word] - 1
+                else
+                    words[word] = nil
+                end
+            end
+        elseif query == "stop" then
+            break
+        end
+    end
+    for word,count in pairs(words) do
+        print(word .. " : " .. count)
+    end
+
+end
+
+function insertOrUpdate(word)
+    if words[word] then
+        words[word] = words[word] + 1
+    else
+        words[word] = 1
+    end
+end
+
+--Problem 3
+-- Given an input sequence of a code and a word, of the code is a we must increment the frequency of that follows,
+--and if the code is f we must write to standard output the frequency of the word that follows.
+--(in part of the sequence read until then)
+--If the word does not exist, the frequency is zero.
+
+-- refactored problem parameters by AI
+-- Process a sequence of (code, word) pairs:
+-- - If code is 'a', increment the word's frequency.
+-- - If code is 'f', print the current frequency of that word.
+-- Frequencies are based on all inputs seen so far; unseen words have frequency 0.
+
+local wordFreq = {}
+
+function problem3()
+    while true do
+        local line = io.read("*line")
+        if not line then
+            break
+        end
+
+        local code, word = line:match("(%a) (%a+)")
+        if code and word then
+            if code == "a" then
+                wordFreq[word] = (wordFreq[word] or 0) + 1
+            elseif code == "f" then
+                print(wordFreq[word] or 0)
+            end
+        end
+    end
 end
