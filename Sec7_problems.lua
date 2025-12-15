@@ -76,6 +76,30 @@ root7.right = Node.new(3)
 root7.right.left = Node.new(6)
 root7.right.right = Node.new(7)
 
+local root8 = Node.new(40)
+root8.left = Node.new(4)
+root8.left.right = Node.new(34)
+root8.left.right.left = Node.new(14)
+root8.left.right.left.left = Node.new(13)
+root8.left.right.left.right = Node.new(15)
+root8.right = Node.new(45)
+root8.right.right = Node.new(55)
+root8.right.right.left = Node.new(48)
+root8.right.right.left.left = Node.new(47)
+root8.right.right.left.right = Node.new(49)
+--root8.right.right.left.right = Node.new(2)
+
+local root9 = Node.new(5)
+root9.left = Node.new(4)
+root9.left.left = Node.new(11)
+root9.left.left.left = Node.new(7)
+root9.left.left.right = Node.new(2)
+root9.right = Node.new(8)
+root9.right.left = Node.new(13)
+root9.right.right = Node.new(4)
+root9.right.right.right = Node.new(1)
+
+
 -- Problem 1
 -- Write a function called size that, given a tree, returns it's size, that is, the number of nodes it contains.
 
@@ -210,6 +234,58 @@ end
 
 print("Problem 7")
 print("This is the In Order traversal of the tree: ", table.concat(inorder(root7), ", "))
+print()
 
 -- Problem 8
--- 
+-- Write a function called minimum that, given a binary tree, returns the minimum value on the nodes.
+-- expected output: 4
+
+-- My attempt that failed
+
+--if node then
+--    local min = node.value or 0
+--    local min_v = min_value or 0
+--    if min > min_v then
+--        min = min_v
+--    end
+--   if minimum(node.left, min) < min then
+--        min = minimum(node.left)
+--    elseif minimum(node.right, min) < min then
+--        min = minimum(node.right)
+--    end
+--    return min
+--end
+
+
+function minimum(node,min_value)
+    if not node then
+        return nil
+    else
+        local minLeft = minimum(node.left)
+        local minRight = minimum(node.right)
+
+        local currentMin = node.value
+
+        if minLeft and minLeft < currentMin then
+            currentMin = minLeft
+        end
+        if minRight and minRight < currentMin then
+            currentMin = minRight
+        end
+
+        return currentMin
+    end
+end
+
+print("Problem 8")
+print("This is the Minimum of the tree: ", minimum(root8))
+print()
+
+-- Problem 9
+-- We'll define a root to leaf path to be a sequence of nodes in a tree starting with the root node and proceeding 
+-- downward to a leaf(a node with no children). We'll say that anb empty tree contains no root to leaf paths.
+-- expected output:
+-- path 1: 5 4 11 7
+-- path 2: 5 4 11 2
+-- path 3: 5 8 13
+-- path 4: 5 8 4 1
