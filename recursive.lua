@@ -1,0 +1,4 @@
+--Recursive Function 
+-- A recursive function is a programming construct in which a function calls itself in order to solve a problem.
+-- Instead of solving the entire problem at once, a recursive function breaks it down into smaller, 
+-- similar subproblem's and solves each subproblem by calling itself recursively.
