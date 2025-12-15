@@ -1,9 +1,4 @@
--- Problem 1
--- Write a function called size that, given a tree, returns it's size, that is, the number of nodes it contains.
-
--- Output: 9
-
--- Define a node structure for the binary tree
+--Create Node system
 local Node = {}
 Node.__index = Node
 
@@ -72,6 +67,21 @@ root6.left.right = Node.new(7)
 root6.right = Node.new(15)
 root6.right.left = Node.new(12)
 root6.right.right = Node.new(20)
+
+local root7 = Node.new(1)
+root7.left = Node.new(2)
+root7.left.left = Node.new(4)
+root7.left.right = Node.new(5)
+root7.right = Node.new(3)
+root7.right.left = Node.new(6)
+root7.right.right = Node.new(7)
+
+-- Problem 1
+-- Write a function called size that, given a tree, returns it's size, that is, the number of nodes it contains.
+
+-- Output: 9
+
+-- Define a node structure for the binary tree
 
 function size(node)
     if not node then
@@ -180,3 +190,26 @@ end
 print("Problem 6")
 print("This is the PostOrder of the tree: ", table.concat(postorder(root6), ", "))
 print()
+
+-- Problem 7
+-- Write a function called inorder that, given a binary tree, returns its in order traversal.
+-- Expected result: 4, 2, 5, 1, 6, 3, 7
+
+function inorder(node,result)
+    result = result or {}
+
+    if node then
+        inorder(node.left,result)
+        table.insert(result,node.value)
+        inorder(node.right,result)
+    end
+    return result
+end
+
+
+
+print("Problem 7")
+print("This is the In Order traversal of the tree: ", table.concat(inorder(root7), ", "))
+
+-- Problem 8
+-- 
