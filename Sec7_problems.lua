@@ -282,10 +282,15 @@ print("This is the Minimum of the tree: ", minimum(root8))
 print()
 
 -- Problem 9
--- We'll define a root to leaf path to be a sequence of nodes in a tree starting with the root node and proceeding 
--- downward to a leaf(a node with no children). We'll say that anb empty tree contains no root to leaf paths.
+-- Write a function called printRootToLeafPaths that given a binary tree, it prints all the root-to-leaf-paths
+    -- We'll define a root to leaf path to be a sequence of nodes in a tree starting with the root node and proceeding 
+    -- downward to a leaf(a node with no children). We'll say that any empty tree contains no root to leaf paths.
 -- expected output:
 -- path 1: 5 4 11 7
 -- path 2: 5 4 11 2
 -- path 3: 5 8 13
 -- path 4: 5 8 4 1
+
+function printRootToLeafPaths(node)
+    
+end
