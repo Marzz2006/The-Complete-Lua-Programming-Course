@@ -291,6 +291,22 @@ print()
 -- path 3: 5 8 13
 -- path 4: 5 8 4 1
 
-function printRootToLeafPaths(node)
-    
+function printRootToLeafPaths(node,path)
+    if not node then
+        return
+    end
+
+    path = path or {}
+    table.insert(path,node.value)
+
+    if not node.left and not node.right then
+        print("Path: ",table.concat(path, " "))
+    else
+        printRootToLeafPaths(node.left,path)
+        printRootToLeafPaths(node.right,path)
+    end
+
+    table.remove(path)
 end
+
+printRootToLeafPaths(root9)
