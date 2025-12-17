@@ -1,0 +1,2 @@
+-- Depth First Search
+-- Depth-first search (DFS) is an algorithm for traversing oir searching graph data structures
