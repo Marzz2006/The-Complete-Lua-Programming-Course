@@ -1,5 +1,111 @@
+-- Treasure Map 1
+-- Output PR1: yes
+-- Output PR2: 4
+local tm1 = {
+    "..t...",
+    "..XXX.",
+    "......",
+    "tX..X.",
+    ".X..Xt",
+    ".XX...",
+    "..t..."
+    }
+
+--Treasure Map 2
+-- Output PR1: no
+-- Output PR2: 0
+local tm2 = {
+    "..t...X...",
+    ".....X..t.",
+    "XXXXX.X...",
+    ".......X.t"
+}
+
+local tm = tm1
+local pr = 1
+
+local r = 5
+local c = 3
+
 -- Problem 1
 -- Write a program that, given as map with treasures and obstacles, 
 -- tells if it is possible to reach treasure from a given initial position.
 -- The allowed movements are horizontal or vertical, but not diagonal.
+
+local dirs = {{1,0},{-1,0},{0,1},{0,-1}}
+local tc = 0
+
+local function is_valid(G,i,j)
+    return i >= 1 and i <= #G and j >=1 and j <= #G[1]
+end
+
+local function dfs_treasure(G,i,j,x)
+    if x == 1 then
+        if G[i][j] == 'X' then
+            return false
+        end
+    elseif x == 2 then
+        if G[i][j] == 'X' then
+            return tc
+        end
+    end
+    
+
+    if x == 1 then
+        if G[i][j] == 't' then
+            return true
+        end 
+    elseif x == 2 then
+        tc = tc + 1
+    end
+
+    G[i][j] = "X"
+
+    for _,d in ipairs(dirs) do
+        local ni = i + d[1]
+        local nj = j + d[2]
+        if is_valid(G,ni,nj) and dfs_treasure(G, ni, nj, x) then
+            return true
+        end
+    end
+    return false
+end
+
+local G = {}
+local lr = {}
+
+--for i = 1,n do
+for r = 1,#tm do
+    local rs = tm[r]
+    if r ~= 1 and #lr ~= #rs then
+        print("Treasure Map Invalid. All lines must be same length")
+        G={}
+        break
+    end
+    local row = {}
+    local rowStr = rs
+    for j = 1,#rowStr do
+        row[j] = rowStr:sub(j,j)
+    end
+    table.insert(G,row)
+    lr = rs
+end
+
+local treasure
+
+if #G > 0 and pr == 1 then
+    treasure = dfs_treasure(G,r,c,pr)
+
+    if treasure then
+        print("yes")
+    else
+        print("no")
+    end
+end
+
+-- Problem 2
+-- Write a program that, given a map with treasures and obstacles, computes the number of treasures than can be reached
+-- from a given initial position. The allowed movements are horizontal or vertical, but not diagonal. 
+-- If needed, passing over treasures is allowed.
+
 
