@@ -23,35 +23,11 @@ local tm2 = {
     ".......X.t"
 }
 
---Treasure Map 3
--- Output PR1: yes
--- Output PR2: 2
--- sp = 5,5
-local tm3 = {
-    ".......",
-    ".XXXXXt",
-    ".X...Xt",
-    ".X.X.XX",
-    "...X.Xt"
-}
-
-local tm = tm3
+local tm = tm1
 local pr = 1
 
-local r = 0
-local c = 0
-
-if tm == tm1 then
-    r = 5
-    c = 3
-elseif tm == tm2 then
-    r = 4
-    c = 1
-elseif tm == tm3 then
-    r = 5
-    c = 5
-end
-
+local r = 5
+local c = 3
 
 -- Problem 1
 -- Write a program that, given as map with treasures and obstacles, 
