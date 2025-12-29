@@ -151,4 +151,8 @@ if #G > 0 and pr == 2 then
     print("Number of available treasures: ",dfs_treasure(G,r,c,pr))
 end
 
+-- Problem 3
+-- A forest is a graph without cycles, and each of it's connected components is a tree.
+-- Given an undirected graph,is it a forest? In case it is, how many trees does it have.\
+
 
